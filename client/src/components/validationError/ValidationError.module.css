@@ -1,0 +1,14 @@
+.ErrorContainer {
+    width: 100%;
+    height: 25px;
+    margin-top: 10px;
+    text-align: left;
+}
+  
+.Error {
+    color: #f44336;
+    font-size: 0.75rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    letter-spacing: 0.03333em;
+    width: 100%;
+}

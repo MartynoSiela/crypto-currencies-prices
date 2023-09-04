@@ -1,0 +1,16 @@
+.Content {
+    padding-top: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.FormContainer {
+    position: relative;
+}
