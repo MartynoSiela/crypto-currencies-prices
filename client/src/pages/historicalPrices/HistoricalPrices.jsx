@@ -45,10 +45,11 @@ function HistoricalPrices() {
                 <Button type="submit" variant="contained">Submit</Button>
               </Box>
             </Form>
-            {queryValues && <CurrencyPricesGraph values={queryValues} />}
+
           </div>
         </Formik>
       </Box>
+      {queryValues && <CurrencyPricesGraph values={queryValues} />}
     </PageContainer>
   );
 }
