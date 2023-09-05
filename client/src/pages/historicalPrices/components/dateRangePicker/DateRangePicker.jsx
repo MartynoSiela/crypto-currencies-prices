@@ -25,7 +25,7 @@ function DateRangePicker() {
           setFieldValue('startDate', date);
           setFieldTouched('startDate', true);
         }}
-        slotProps={{ textField: { variant: 'outlined' } }}
+        slotProps={{ textField: { variant: 'outlined', disabled: true } }}
       />
       <ValidationError
         touched={typeof touched.endDate === 'object' ? true : touched.endDate}
@@ -41,7 +41,7 @@ function DateRangePicker() {
           setFieldValue('endDate', date);
           setFieldTouched('endDate', true);
         }}
-        slotProps={{ textField: { variant: 'outlined' } }}
+        slotProps={{ textField: { variant: 'outlined', disabled: true } }}
       />
     </LocalizationProvider>
   );
