@@ -1,0 +1,14 @@
+.Content{
+    font-size: medium;
+    padding:20px 0px;
+    width: 90%;
+    min-width: 300px;
+    text-align: justify;
+
+}
+
+@media (min-width: 768px) {
+    .Content {
+        font-size: larger;
+    }
+}
