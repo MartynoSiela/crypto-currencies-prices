@@ -26,6 +26,8 @@ app.get("/search", async (req, res) => {
           .filter(market => 
             market.symbol.toLowerCase().includes(query.toLowerCase())
           )
+          .filter(market => 
+            market.type !== 'option')
           .map(market => ({
             symbol: market.symbol,
             base: market.base,
