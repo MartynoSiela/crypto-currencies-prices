@@ -26,7 +26,7 @@ function HistoricalPrices() {
   };
 
   return (
-    <PageContainer title="Historical Prices">
+    <PageContainer title="Cryptocurrency Historical Prices">
       <Box className={styles.Content}>
         <Formik
           validationSchema={currencyValidation}
@@ -42,7 +42,7 @@ function HistoricalPrices() {
               <CurrencyInputField />
               <DateRangePicker />
               <Box mt={2}>
-                <Button type="submit" variant="contained">Submit</Button>
+                <Button type="submit" variant="contained">Get Prices</Button>
               </Box>
             </Form>
 
