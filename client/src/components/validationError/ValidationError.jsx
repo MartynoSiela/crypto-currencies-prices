@@ -15,12 +15,13 @@ export default function ValidationError({
 }
 
 ValidationError.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   touched: PropTypes.bool,
   error: PropTypes.string,
 };
 
 ValidationError.defaultProps = {
+  name: '',
   touched: false,
   error: '',
 };

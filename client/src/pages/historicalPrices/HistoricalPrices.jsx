@@ -1,37 +1,15 @@
 import React, { useState } from 'react';
-import { Box, Button, CircularProgress } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { Form, Formik } from 'formik';
-import axios from 'axios';
-import { format } from 'date-fns';
-import { toast } from 'react-toastify';
-import { ENDPOINTS } from 'constants/endpoints';
 import { currencyValidation } from 'constants/validation/currency';
 import PageContainer from 'components/pageContainer/PageContainer';
 import CurrencyInputField from './components/currencyInputField';
 import DateRangePicker from './components/dateRangePicker';
-import Graph from './components/graph';
+import CurrencyPricesGraph from './components/currencyPricesGraph';
 import styles from './HistoricalPrices.module.css';
 
 function HistoricalPrices() {
-  const [graphLoading, setGraphLoading] = useState(false);
-  const [graphData, setGraphData] = useState(null);
-
-  const fetchData = async (values) => {
-    try {
-      const response = await axios.get(ENDPOINTS.GET_PRICE_HISTORY, {
-        params: {
-          currency: values.currency,
-          startDate: format(values.startDate, 'yyyy-MM-dd'),
-          endDate: format(values.endDate, 'yyyy-MM-dd'),
-        },
-      });
-      setGraphData(response.data);
-    } catch (error) {
-      toast.error(error.message);
-    } finally {
-      setGraphLoading(false);
-    }
-  };
+  const [queryValues, setQueryValues] = useState(null);
 
   const initialValues = {
     currency: '',
@@ -55,8 +33,7 @@ function HistoricalPrices() {
           initialValues={initialValues}
           validateOnBlur={false}
           onSubmit={(values) => {
-            setGraphLoading(true);
-            fetchData(values);
+            setQueryValues(values);
           }}
           validate={validateDates}
         >
@@ -68,13 +45,9 @@ function HistoricalPrices() {
                 <Button type="submit" variant="contained">Submit</Button>
               </Box>
             </Form>
+            {queryValues && <CurrencyPricesGraph values={queryValues} />}
           </div>
         </Formik>
-      </Box>
-      <Box>
-        {graphLoading
-          ? (<CircularProgress />)
-          : graphData && (<Graph data={graphData} />)}
       </Box>
     </PageContainer>
   );

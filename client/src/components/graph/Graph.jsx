@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactApexChart from 'react-apexcharts';
+import ValidationError from 'components/validationError';
 
 function Graph({ data }) {
   const lowPrices = data.map((d) => d[2]);
@@ -33,7 +34,11 @@ function Graph({ data }) {
   };
 
   return (
-    <ReactApexChart options={options} series={series} type="candlestick" />
+    <div>
+      { data.length > 0
+        ? (<ReactApexChart options={options} series={series} type="candlestick" />)
+        : (<ValidationError touched error="No data to display" />)}
+    </div>
   );
 }
 
