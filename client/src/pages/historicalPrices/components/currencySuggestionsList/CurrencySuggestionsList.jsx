@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  CircularProgress, ListItem, ListItemButton,
+  CircularProgress, List, ListItem, ListItemButton,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import styles from './CurrencySuggestionsList.module.css';
@@ -17,10 +17,14 @@ function CurrencySuggestionsList({
   }
 
   return (
-    <ul
+    <List
+      sx={{
+        position: 'absolute',
+        backgroundColor: (theme) => (theme.palette.mode === 'dark' ? '#121212' : '#fff'),
+      }}
       className={styles.SuggestionsList}
     >
-      {loading && <CircularProgress size={30} />}
+      {loading && <CircularProgress sx={{ marginTop: '5px', marginBottom: '5px' }} size={30} />}
 
       {!loading && currenciesList.length > 0 && (currenciesList.map((currency) => (
         <ListItem
@@ -36,9 +40,9 @@ function CurrencySuggestionsList({
       )))}
 
       {!loading && !currenciesList.length && (
-        <ListItem className={styles.NoMatches}>{error || 'No matches found'}</ListItem>
+        <ListItem>{error || 'No matches found'}</ListItem>
       )}
-    </ul>
+    </List>
   );
 }
 

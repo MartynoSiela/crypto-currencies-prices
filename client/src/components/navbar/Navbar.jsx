@@ -2,10 +2,11 @@ import React from 'react';
 import {
   AppBar, Button, IconButton, Toolbar, useMediaQuery, useTheme,
 } from '@mui/material';
-import { Menu as MenuIcon } from '@mui/icons-material';
+import { Menu as MenuIcon, Brightness3 as MoonIcon, Brightness7 as SunIcon } from '@mui/icons-material';
+import PropTypes from 'prop-types';
 import styles from './Navbar.module.css';
 
-function Navbar() {
+function Navbar({ colorTheme, toggleColorTheme }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -23,9 +24,22 @@ function Navbar() {
           </>
 
         )}
+        <IconButton color="inherit" edge="end" onClick={toggleColorTheme}>
+          {colorTheme === 'light' ? <MoonIcon /> : <SunIcon />}
+        </IconButton>
       </Toolbar>
     </AppBar>
   );
 }
+
+Navbar.propTypes = {
+  colorTheme: PropTypes.string,
+  toggleColorTheme: PropTypes.func,
+};
+
+Navbar.defaultProps = {
+  colorTheme: '',
+  toggleColorTheme: null,
+};
 
 export default Navbar;
