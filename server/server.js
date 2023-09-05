@@ -19,6 +19,7 @@ app.get("/search", async (req, res) => {
       return res.json([]);
     }
 
+    console.log(`User searched for cryptocurrency: ${query}`)
     try {
         await exchange.loadMarkets();
     
@@ -33,9 +34,10 @@ app.get("/search", async (req, res) => {
             base: market.base,
             quote: market.quote
           }));
-
+        
           return res.json(matchingSymbols);
       } catch (error) {
+        console.log(error)
         return res.status(500).json({ message: error.message });
       }
 });
@@ -43,11 +45,13 @@ app.get("/search", async (req, res) => {
 app.get('/currency/history', async (req, res) => {
   try {
     const { currency, startDate, endDate } = req.query;
+    console.log(`User selected cryptocurrency: ${currency}`)
     const start = Date.parse(startDate)
     const end = Date.parse(endDate)
     const ohlcv = await exchange.fetchOHLCV(currency, '1d', since=start, limit=Math.ceil((end - start) / (24 * 60 * 60 * 1000)) + 1);
     return res.json(ohlcv);
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ message: error.message });
   }
 });
