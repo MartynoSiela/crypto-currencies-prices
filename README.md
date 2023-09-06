@@ -1,4 +1,6 @@
 # Historical Prices for Crypto Currencies
+## Deployment
+Update: the site should be live [here](https://cryptocurrencyhistorical-d4b92.firebaseapp.com/)!. It was deployed using Firebase. See [known issues](#known-issues) section for explanation of about task deployment requirements.
 ## Description
 The project uses the following technologies:
 - React for frontend

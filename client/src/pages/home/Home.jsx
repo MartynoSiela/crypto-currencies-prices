@@ -23,7 +23,10 @@ function Home() {
             which is supported not by all exchanges in the <i>ccxt</i> library.
             There is a list of {renderLink('https://docs.ccxt.com/#/Exchange-Markets', 'supported exchanges')} however
             even from this list, some exchanges do not fully support the fetchOHLCV method.
-            By trial and error {renderLink('https://www.bybit.com/', 'Bybit')} exchange was chosen for this task.
+          </p>
+          <p>
+            <s>By trial and error {renderLink('https://www.bybit.com/', 'Bybit')} exchange was chosen for this task.</s>
+            {renderLink('https://www.mexc.com/', 'MEXC Global')} was chosen as <i>Bybit</i> was being blocked by CloudFront.
           </p>
           <p>fetchOHLCV method also cannot be used on options so these are filtered out
             when generating suggestions as the user is searching for a currency.
