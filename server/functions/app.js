@@ -4,7 +4,7 @@ const logger = require('./logger')
 const ccxt = require('ccxt')
 
 const app = express()
-app.use(cors({ origin: 'https://cryptocurrencyhistorical-d4b92.firebaseapp.com' }))
+app.use(cors({ origin: ['https://cryptocurrencyhistorical-d4b92.firebaseapp.com', 'http://localhost:3000'] }))
 
 const exchange = new ccxt.mexc()
 
