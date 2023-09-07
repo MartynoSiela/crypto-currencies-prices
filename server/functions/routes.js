@@ -25,7 +25,7 @@ router.get('/search', async (req, res) => {
   const symbol = req.query.symbol
 
   if (!symbol) {
-    return res.json([])
+    return res.status(400).json({ error: "The 'symbol' query parameter is required." })
   }
 
   logger.info(`User searched for cryptocurrency: ${symbol}`)
@@ -82,8 +82,15 @@ router.get('/search', async (req, res) => {
  *         description: Successful response with list of history data
  */
 router.get('/currency/history', async (req, res) => {
+  const { symbol, startDate, endDate } = req.query
+
+  if (!symbol || !startDate || !endDate) {
+    return res.status(400).json({
+      error: "The 'symbol', 'startDate', and 'endDate' query parameters are required."
+    })
+  }
+
   try {
-    const { symbol, startDate, endDate } = req.query
     logger.info(`User selected cryptocurrency: ${symbol}`)
     const start = Date.parse(startDate) - (24 * 60 * 60 * 1000)
     const end = Date.parse(endDate)
