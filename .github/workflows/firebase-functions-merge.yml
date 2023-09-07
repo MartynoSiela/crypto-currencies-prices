@@ -18,4 +18,5 @@ jobs:
         with:
           args: deploy --only functions
         env:
+          PROJECT_PATH: ./server
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
