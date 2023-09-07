@@ -26,6 +26,7 @@ function Home() {
           </p>
           <p>
             <s>By trial and error {renderLink('https://www.bybit.com/', 'Bybit')} exchange was chosen for this task.</s>
+            <br />
             {renderLink('https://www.mexc.com/', 'MEXC Global')} was chosen as <i>Bybit</i> was being blocked by CloudFront.
           </p>
           <p>fetchOHLCV method also cannot be used on options so these are filtered out

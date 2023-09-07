@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Home from 'pages/home/Home';
 import HistoricalPrices from 'pages/historicalPrices';
 import Navbar from 'components/navbar';
+import NotFound from 'pages/notFound';
 
 function RouterProvider({ colorTheme, toggleColorTheme }) {
   return (
@@ -13,6 +14,7 @@ function RouterProvider({ colorTheme, toggleColorTheme }) {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/historical-prices" element={<HistoricalPrices />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </Router>
