@@ -26,9 +26,9 @@ function CurrencyInputField() {
     try {
       const response = await axios.get(`${ENDPOINTS.GET_CURRENCY}?symbol=${query}`);
       setCurrencies(response.data);
-    } catch (err) {
-      setError(err.response.data.error);
-      toast.error('Error fetching currencies', err);
+    } catch (e) {
+      setError(e.response.data.error);
+      toast.error(e.message);
     } finally {
       setLoading(false);
     }

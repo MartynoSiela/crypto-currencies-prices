@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 function useQuery({
   url,
@@ -18,7 +19,8 @@ function useQuery({
       setData(response.data);
       onSuccess(response.data);
     } catch (e) {
-      setError(error.message);
+      toast.error(e.message);
+      setError(e.message);
     } finally {
       setIsLoading(false);
     }
