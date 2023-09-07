@@ -24,7 +24,7 @@ function CurrencyInputField() {
 
   const fetchCryptos = useCallback(debounce(async (query) => {
     try {
-      const response = await axios.get(`${ENDPOINTS.GET_CURRENCY}?query=${query}`);
+      const response = await axios.get(`${ENDPOINTS.GET_CURRENCY}?symbol=${query}`);
       setCurrencies(response.data);
     } catch (err) {
       setError(err.response.data.error);
@@ -49,8 +49,8 @@ function CurrencyInputField() {
     }
   };
 
-  const handleCryptoClick = (selectedCrypto) => {
-    setFieldValue('currency', selectedCrypto);
+  const handleCurrencyClick = (selectedCurrency) => {
+    setFieldValue('currency', selectedCurrency);
     setCurrencies([]);
     setSearching(false);
   };
@@ -62,7 +62,7 @@ function CurrencyInputField() {
         className={styles.Input}
         as={TextField}
         name="currency"
-        label="Currency"
+        label="Currency Symbol"
         value={currency}
         onChange={handleInputChange}
         InputProps={{
@@ -84,7 +84,7 @@ function CurrencyInputField() {
         }}
       />
       <CurrencySuggestionsList
-        onCurrencyClick={handleCryptoClick}
+        onCurrencyClick={handleCurrencyClick}
         currenciesList={currencies || []}
         loading={loading}
         searching={searching}

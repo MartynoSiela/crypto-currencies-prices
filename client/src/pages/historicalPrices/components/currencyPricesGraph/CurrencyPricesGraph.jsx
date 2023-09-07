@@ -13,7 +13,7 @@ function CurrencyPricesGraph({ values }) {
       url: queryService.createUrl(
         ENDPOINTS.GET_PRICE_HISTORY,
         {
-          currency: values.currency,
+          symbol: values.currency,
           startDate: format(values.startDate, 'yyyy-MM-dd'),
           endDate: format(values.endDate, 'yyyy-MM-dd'),
         },
