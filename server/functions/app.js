@@ -1,55 +1,29 @@
 const express = require('express')
 const cors = require('cors')
-const logger = require('./logger')
-const ccxt = require('ccxt')
+const swaggerUi = require('swagger-ui-express')
+const swaggerJsdoc = require('swagger-jsdoc')
+const routes = require('./routes')
 
 const app = express()
+
 app.use(cors({ origin: ['https://cryptocurrencyhistorical-d4b92.firebaseapp.com', 'http://localhost:3000'] }))
 
-const exchange = new ccxt.mexc()
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Crypto API',
+      version: '1.0.0',
+      description: 'API to fetch cryptocurrency information'
+    }
+  },
+  apis: ['./functions/routes.js']
+}
 
-app.get('/search', async (req, res) => {
-  const query = req.query.query
+const specs = swaggerJsdoc(options)
+console.log(JSON.stringify(specs, null, 2))
 
-  if (!query) {
-    return res.json([])
-  }
-
-  logger.info(`User searched for cryptocurrency: ${query}`)
-  try {
-    await exchange.loadMarkets()
-
-    const matchingSymbols = Object.values(exchange.markets)
-      .filter(market =>
-        market.symbol.toLowerCase().includes(query.toLowerCase())
-      )
-      .filter(market =>
-        market.type !== 'option')
-      .map(market => ({
-        symbol: market.symbol,
-        base: market.base,
-        quote: market.quote
-      }))
-
-    return res.json(matchingSymbols)
-  } catch (error) {
-    logger.info(error)
-    return res.status(500).json({ message: error.message })
-  }
-})
-
-app.get('/currency/history', async (req, res) => {
-  try {
-    const { currency, startDate, endDate } = req.query
-    logger.info(`User selected cryptocurrency: ${currency}`)
-    const start = Date.parse(startDate) - (24 * 60 * 60 * 1000)
-    const end = Date.parse(endDate)
-    const ohlcv = await exchange.fetchOHLCV(currency, '1d', start, Math.ceil((end - start) / (24 * 60 * 60 * 1000)))
-    return res.json(ohlcv)
-  } catch (error) {
-    logger.info(error)
-    return res.status(500).json({ message: error.message })
-  }
-})
+app.use(routes)
+app.use('/', swaggerUi.serve, swaggerUi.setup(specs))
 
 module.exports = app
