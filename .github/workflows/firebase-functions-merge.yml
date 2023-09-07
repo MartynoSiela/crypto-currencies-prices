@@ -6,6 +6,7 @@ name: Deploy to Firebase Functions on server changes
       - master
     paths:
       - server/**
+  workflow_dispatch:
 
 jobs:
   deploy_to_functions:
